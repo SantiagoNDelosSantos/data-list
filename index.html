@@ -3,30 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ejemplo de Datalist</title>
+    <title>Ejemplo de Select Ordenado</title>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <style>
+        .select2-container--default .select2-selection--single {
+            height: 40px;
+            padding: 5px;
+            font-size: 16px;
+            border-radius: 4px;
+            border: 2px solid #ccc;
+        }
+        .select2-container--default .select2-selection--single .select2-selection__arrow {
+            height: 34px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Ejemplo de Datalist</h1>
+    <h1>Ejemplo de Select2 con Datos Ordenados</h1>
     
-    <label for="fruta">Elige una fruta: </label>
-    <input list="frutas" id="fruta" name="fruta">
-    <datalist id="frutas">
-        <option value="Manzana">
-        <option value="Banana">
-        <option value="Cereza">
-        <option value="Mango">
-        <option value="Naranja">
-    </datalist>
+    <label for="subcategoria">Elige una subcategoría: </label>
+    <select id="subcategoria" name="subcategoria" style="width: 100%"></select>
 
-    <h1>Ejemplo de Select</h1>
-    
-    <label for="color">Elige un color: </label>
-    <select id="color" name="color">
-        <option value="rojo">Rojo</option>
-        <option value="verde">Verde</option>
-        <option value="azul">Azul</option>
-        <option value="amarillo">Amarillo</option>
-        <option value="negro">Negro</option>
-    </select>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        // Array de ejemplo
+        const subCategories1 = [
+            { id: 1, name: "Cerezas" },
+            { id: 2, name: "Bananas" },
+            { id: 3, name: "Manzanas" },
+            { id: 4, name: "Naranjas" },
+            { id: 5, name: "Mangos" }
+        ];
+
+        // Función para ordenar alfabéticamente por el campo 'name'
+        subCategories1.sort((a, b) => {
+            return a.name.localeCompare(b.name);
+        });
+
+        // Poblar el select con los datos ordenados
+        const selectElement = document.getElementById('subcategoria');
+        subCategories1.forEach(subCategory => {
+            const option = document.createElement('option');
+            option.value = subCategory.id;
+            option.text = subCategory.name;
+            selectElement.appendChild(option);
+        });
+
+        // Inicializar Select2
+        $(document).ready(function() {
+            $('#subcategoria').select2({
+                placeholder: "Selecciona una subcategoría",
+                allowClear: true
+            });
+        });
+    </script>
 </body>
 </html>
