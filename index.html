@@ -5,45 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Enviar Notificación Push</title>
 </head>
-<body>
-<h1>Enviar Notificación Push</h1>
-<button onclick="solicitarPermiso()">Solicitar permiso para enviar notificaciones</button>
-<script>
-function solicitarPermiso() {
-  Notification.requestPermission().then(function(result) {
-    if (result === 'granted') {
-      console.log('Permiso para enviar notificaciones concedido');
-      enviarNotificacion();
-    } else {
-      console.log('Permiso para enviar notificaciones denegado');
-    }
-  });
-}
-
-function enviarNotificacion() {
-  if (!('Notification' in window)) {
-    console.error('Este navegador no soporta notificaciones push.');
-    return;
-  }
-
-  if (Notification.permission !== 'granted') {
-    console.error('Permiso para enviar notificaciones no concedido.');
-    return;
-  }
-
-  var options = {
-    body: '¡Hola! Esta es una notificación de prueba.',
-    icon: './img/SpaceX_Crew_Dragon (1).jpg'
-  };
-
-  var notification = new Notification('Notificación de Prueba', options);
-
-  notification.onclick = function(event) {
-    event.preventDefault();
-    console.log('Notificación clicada.');
-    // Aquí puedes agregar acciones adicionales al hacer clic en la notificación
-  };
-}
-</script>
+<body style="background-color: red; height: 100vh; width: 100vw;">
 </body>
 </html>
